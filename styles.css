@@ -368,3 +368,83 @@ button{
 
 
 
+
+
+.order-summary {
+    margin: 20px;
+}
+
+.order-summary h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.cart-item-summary {
+    margin-bottom: 10px;
+}
+
+.order-form {
+    margin: 20px;
+}
+
+.order-form h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-actions {
+    margin-top: 20px;
+}
+
+.form-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.form-actions button[type="submit"] {
+    background-color: #ffcc00;
+    color: #333;
+}
+
+.form-actions button[type="submit"]:hover {
+    background-color: #ffa500;
+}
+
+.form-actions button#cancel-order {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.form-actions button#cancel-order:hover {
+    background-color: #d32f2f;
+}
+
+/* Inicialmente esconde o botão */
+.checkout {
+    color: rgb(0, 0, 0);
+    background: #d32f2f;
+}
+
+
+
+
+

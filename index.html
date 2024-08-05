@@ -201,6 +201,33 @@
    
     </aside>
 
+    <section class="order-form">
+        <h2>Finalizar Pedido</h2>
+        <form id="finalize-order-form">
+            <div class="form-group">
+                <label for="customer-name">Nome Completo:</label>
+                <input type="text" id="customer-name" name="customer-name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="address">Endereço para Entrega:</label>
+                <textarea id="address" name="address" rows="4" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="payment-method">Método de Pagamento:</label>
+                <select id="payment-method" name="payment-method" required>
+                    <option value="pix">PIX</option>
+                    <option value="credito">Cartão de Crédito</option>
+                    <option value="debito">Cartão de Débito</option>
+                </select>
+            </div>           
+            
+
+        </form>
+    </section>
+</main>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="script.js"></script>
 </body>

@@ -1,14 +1,10 @@
-$('.btn').click(function () {
-    $(this).toggleClass('active');
-  });
-
-
 document.addEventListener('DOMContentLoaded', function() {
     let cart = [];
     const cartItemsContainer = document.querySelector('.cart-items');
     const cartTotal = document.getElementById('cart-total');
     const clearCartButton = document.querySelector('.clear-cart');
     const checkoutButton = document.querySelector('.checkout');
+    let msn = "";
 
     // Atualiza o total do carrinho
     function updateCartTotal() {
@@ -41,6 +37,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 cart[index].quantity += 1;
                 renderCartItems();
                 updateCartTotal();
+                //teste
+                localStorage[index].quantity += 1;
             });
         });
 
@@ -51,12 +49,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     cart[index].quantity -= 1;
                     renderCartItems();
                     updateCartTotal();
+                    
+                    //teste
+                    localStorage[index].quantity -= 1;
                 }else if (cart[index].quantity = 1) {
                     cart[index].quantity -= 1;
                     cart.splice(index,1);
                     renderCartItems();
                     updateCartTotal();
-
+                    
+                    //teste
+                    localStorage[index].quantity -= 1;
+                    localStorage.splice(index,1);
 
                 }
             });
@@ -64,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function addToCart(name, price, quantity, note) {
+        
         // Verifica se o item já existe no carrinho com a mesma observação
         const existingItem = cart.find(item => item.name === name && item.note === note);
         
@@ -77,6 +82,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         renderCartItems();
         updateCartTotal();
+
+        //teste   
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
     }
     
 
@@ -138,10 +147,33 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     clearCartButton.addEventListener('click', clearCart);
+    
+    
+    const form = document.getElementById('finalize-order-form');
+    
+    // Função para verificar se o formulário é válido
+    function checkFormValidity() {
+        if (form.checkValidity()) {
+            checkoutButton.style.background= '#ffa500' ; // Revela o botão
+             msn = "Pedido finalizado!"
+
+        } else {
+             msn = "Preencha o formulario!"
+
+        }
+    }
+    
+
     checkoutButton.addEventListener('click', function() {
-        alert('Pedido finalizado!');
+        alert(msn);
         clearCart();
     });
+
+    // Adiciona eventos de entrada e mudança aos campos do formulário
+    form.addEventListener('input', checkFormValidity);
+    
+
+    
+
+
 });
-
-
