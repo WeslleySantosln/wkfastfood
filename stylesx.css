@@ -1,0 +1,77 @@
+.containerx{
+    position: relative;
+    width: 20px;
+  }
+
+  .btn {
+    position: absolute;
+    width: 20px;
+    height: 3px;
+    top: 0;
+    left: 0px;
+    cursor: pointer;
+  }
+
+  .btn-left {
+    background-color: #333;
+    position: absolute;
+    height: 3px;
+    width: 20px;
+    left: 0px;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+  }
+  .btn-left:before {
+    background-color: #333;
+    position: absolute;
+    width: 20px;
+    height: 3px;
+    content: "";
+    top: -7px;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+  }
+  .btn-left:after {
+    background-color: #333;
+    position: absolute;
+    width: 20px;
+    height: 3px;
+    content: "";
+    top: 7px;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+  }
+  
+
+  
+  .active .btn-left {
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    background: transparent;
+  }
+  .active .btn-left:before {
+    -webkit-transform: rotateZ(45deg) scaleX(1.4) translate(4px, 4px);
+    transform: rotateZ(45deg) scaleX(1.4) translate(4px, 4px);
+  }
+  .active .btn-left:after {
+    -webkit-transform: rotateZ(-45deg) scaleX(1.4) translate(4px, -4px);
+    transform: rotateZ(-45deg) scaleX(1.4) translate(4px, -4px);
+  }
+  .active .btn-right {
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    background: transparent;
+  }
+  .active .btn-right:before {
+    -webkit-transform: rotateZ(-45deg) scaleX(1.4) translate(-4px, 4px);
+    transform: rotateZ(-45deg) scaleX(1.4) translate(-4px, 4px);
+  }
+  .active .btn-right:after {
+    -webkit-transform: rotateZ(45deg) scaleX(1.4) translate(-4px, -4px);
+    transform: rotateZ(45deg) scaleX(1.4) translate(-4px, -4px);
+  }
+
+
+
+
+  
