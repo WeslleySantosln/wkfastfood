@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    let cart = [];
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
     const cartItemsContainer = document.querySelector('.cart-items');
     const cartTotal = document.getElementById('cart-total');
     const clearCartButton = document.querySelector('.clear-cart');
@@ -37,8 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 cart[index].quantity += 1;
                 renderCartItems();
                 updateCartTotal();
-                //teste
-                localStorage[index].quantity += 1;
+                localStorage.setItem('cart', JSON.stringify(cart));
             });
         });
 
@@ -47,31 +46,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 const index = this.getAttribute('data-index');
                 if (cart[index].quantity > 1) {
                     cart[index].quantity -= 1;
-                    renderCartItems();
-                    updateCartTotal();
-                    
-                    //teste
-                    localStorage[index].quantity -= 1;
-                }else if (cart[index].quantity = 1) {
-                    cart[index].quantity -= 1;
-                    cart.splice(index,1);
-                    renderCartItems();
-                    updateCartTotal();
-                    
-                    //teste
-                    localStorage[index].quantity -= 1;
-                    localStorage.splice(index,1);
-
+                } else {
+                    cart.splice(index, 1);
                 }
+                renderCartItems();
+                updateCartTotal();
+                localStorage.setItem('cart', JSON.stringify(cart));
             });
         });
     }
 
     function addToCart(name, price, quantity, note) {
-        
         // Verifica se o item já existe no carrinho com a mesma observação
         const existingItem = cart.find(item => item.name === name && item.note === note);
-        
+
         if (existingItem) {
             // Se o item já existe com a mesma observação, apenas atualize a quantidade
             existingItem.quantity += quantity;
@@ -79,21 +67,18 @@ document.addEventListener('DOMContentLoaded', function() {
             // Se o item não existe ou tem uma observação diferente, adicione um novo item
             cart.push({ name, price, quantity, note });
         }
-        
+
         renderCartItems();
         updateCartTotal();
-
-        //teste   
         localStorage.setItem('cart', JSON.stringify(cart));
-        
     }
-    
 
     // Limpa o carrinho
     function clearCart() {
         cart = [];
         renderCartItems();
         updateCartTotal();
+        localStorage.setItem('cart', JSON.stringify(cart));
     }
 
     // Inicializa os botões de alternância
@@ -110,29 +95,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Adiciona itens ao carrinho a partir dos checkboxes
-    /*document.querySelectorAll('.checkbox').forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            const menuItem = this.closest('.menu-item');
-            const itemName = menuItem.querySelector('h3').textContent;
-            const itemPrice = parseFloat(menuItem.querySelector('p').textContent.replace('R$ ', ''));
-            const itemQuantity = parseInt(menuItem.querySelector('input[type="number"]').value);
-            const itemNote = menuItem.querySelector('input[type="text"]').value;
-
-            if (this.checked) {
-                addToCart(itemName, itemPrice, itemQuantity, itemNote);
-            } else {
-                // Remover item do carrinho quando desmarcado (opcional)
-                const itemIndex = cart.findIndex(item => item.name === itemName);
-                if (itemIndex > -1) {
-                    cart.splice(itemIndex, 1);
-                    renderCartItems();
-                    updateCartTotal();
-                }
-            }
-        });
-    });*/
-
     // Adiciona itens ao carrinho a partir dos botões "Adicionar ao carrinho"
     document.querySelectorAll('.add-to-cart').forEach(button => {
         button.addEventListener('click', function() {
@@ -147,33 +109,30 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     clearCartButton.addEventListener('click', clearCart);
-    
-    
+
     const form = document.getElementById('finalize-order-form');
-    
+
     // Função para verificar se o formulário é válido
     function checkFormValidity() {
         if (form.checkValidity()) {
             checkoutButton.style.background= '#ffa500' ; // Revela o botão
-             msn = "Pedido finalizado!"
-
+            msn = "Pedido finalizado!";
         } else {
-             msn = "Preencha o formulario!"
-
+            msn = "Preencha o formulário!";
         }
     }
-    
 
     checkoutButton.addEventListener('click', function() {
         alert(msn);
-        clearCart();
+        if (msn === "Pedido finalizado!") {
+            clearCart();
+        }
     });
 
     // Adiciona eventos de entrada e mudança aos campos do formulário
     form.addEventListener('input', checkFormValidity);
-    
 
-    
-
-
+    // Renderiza os itens do carrinho ao carregar a página
+    renderCartItems();
+    updateCartTotal();
 });
